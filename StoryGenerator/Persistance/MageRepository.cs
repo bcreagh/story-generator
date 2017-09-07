@@ -11,17 +11,10 @@ namespace StoryGenerator.Persistance
     {
         public Mage GetMageById(int id)
         {
-            var documentStore = new DocumentStore
-            {
-                Url = "http://localhost:8080",
-                DefaultDatabase = "GrailWarDb"
-            };
-
-            documentStore.Initialize();
 
             var mage = new Mage();
 
-            using (var session = documentStore.OpenSession())
+            using (var session = DocumentStoreHolder.Store.OpenSession())
             {
                 mage = session.Load<Mage>($"mages/{id}");
             }
@@ -30,17 +23,8 @@ namespace StoryGenerator.Persistance
 
         public void SaveMage(Mage mage)
         {
-            
 
-            var documentStore = new DocumentStore
-            {
-                Url = "http://localhost:8080",
-                DefaultDatabase = "GrailWarDb"
-            };
-
-            documentStore.Initialize();
-
-            using (var session = documentStore.OpenSession())
+            using (var session = DocumentStoreHolder.Store.OpenSession())
             {
                 session.Store(mage);
                 session.SaveChanges();
