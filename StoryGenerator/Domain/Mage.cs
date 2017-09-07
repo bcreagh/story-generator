@@ -1,5 +1,4 @@
 ﻿
-
 using StoryGenerator.Domain.Enums;
 
 namespace StoryGenerator.Domain
@@ -8,7 +7,10 @@ namespace StoryGenerator.Domain
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        [Raven.Imports.Newtonsoft.Json.JsonIgnore]
         public ServantClass ServantClass { get; set; }
+        [Raven.Imports.Newtonsoft.Json.JsonIgnore]
         public Servant Servant { get; set; }
 
         public int Strength { get; set; }
