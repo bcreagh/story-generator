@@ -7,6 +7,7 @@ namespace StoryGenerator.Domain.Enums
 {
     public enum ServantClass
     {
+        Unknown,
         Saber,
         Rider,
         Archer,

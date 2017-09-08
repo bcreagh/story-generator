@@ -5,6 +5,11 @@ namespace StoryGenerator.Domain
 {
     public class Mage
     {
+        public Mage()
+        {
+            ServantClass = ServantClass.Unknown;
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
 
