@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StoryGenerator.Domain;
 using StoryGenerator.Persistance;
+using StoryGenerator.Domain.Validation;
 
 namespace StoryGenerator.Controllers
 {
@@ -16,18 +17,35 @@ namespace StoryGenerator.Controllers
         }
 
         [HttpGet("{id}")]
-        public Mage GetMage(int id)
+        public dynamic GetMage(int id)
         {
             var mage = MageRepository.GetMageById(id);
-            return mage;
+            if (mage != null)
+            {
+                return mage;
+            }
+            else
+            {
+                return NoContent();
+            }
         }
 
         [HttpPost]
         public dynamic SaveMage([FromBody] Mage mage)
         {
-            MageRepository.SaveMage(mage);
 
-            return "Mage Created";
+            MageCreationValidator mcv = new MageCreationValidator();
+            var validationResults = mcv.Validate(mage);
+
+            if (validationResults.IsValid)
+            {
+                MageRepository.SaveMage(mage);
+                return "Mage has been created";
+            }
+            else
+            {
+                return validationResults.Errors;
+            }
         }
     }
 }
