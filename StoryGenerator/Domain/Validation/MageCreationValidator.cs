@@ -18,7 +18,7 @@ namespace StoryGenerator.Domain.Validation
             RuleFor(mage => mage.Honour).InclusiveBetween(0, 100);
             RuleFor(mage => mage.Kindness).InclusiveBetween(0, 100);
             RuleFor(mage => mage.Mercifulness).InclusiveBetween(0, 100);
-            RuleFor(mage => mage.Name.Length).LessThan(100);
+            RuleFor(mage => mage.Name.Length).InclusiveBetween(1, 100);
         }
     }
 }

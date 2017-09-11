@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StoryGenerator.Domain;
+using StoryGenerator.Domain.Validation;
 using StoryGenerator.Persistance;
 using System;
 using System.Collections.Generic;
@@ -35,8 +36,19 @@ namespace StoryGenerator.Controllers
         [HttpPost]
         public dynamic SaveServant([FromBody] Servant servant)
         {
-            ServantRepository.SaveServant(servant);
-            return "Servant has been created";
+            ServantCreationValidator scv = new ServantCreationValidator();
+            var validationResults = scv.Validate(servant);
+
+            if (validationResults.IsValid)
+            {
+                ServantRepository.SaveServant(servant);
+                return "Servant has been created";
+            }
+            else
+            {
+                return validationResults.Errors;
+            }
+            
         }
     }
 }

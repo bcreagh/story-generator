@@ -7,6 +7,11 @@ namespace StoryGenerator.Domain
 {
     public class Servant
     {
+        public Servant()
+        {
+            NoblePhantasm = new NoblePhantasm();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public ServantClass ServantClass { get; set; }
