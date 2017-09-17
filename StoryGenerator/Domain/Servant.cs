@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using StoryGenerator.Domain.Enums;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace StoryGenerator.Domain
 {
@@ -14,6 +16,7 @@ namespace StoryGenerator.Domain
 
         public int Id { get; set; }
         public string Name { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
         public ServantClass ServantClass { get; set; }
         public NoblePhantasm NoblePhantasm { get; set; }
 

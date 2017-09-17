@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using StoryGenerator.Persistance.Abstractions;
 
 namespace StoryGenerator.Persistance
 {
-    public class MageRepository
+    public class MageRepository: IMageRepository
     {
         public Mage GetMageById(int id)
         {

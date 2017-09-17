@@ -2,6 +2,7 @@
 using StoryGenerator.Domain;
 using StoryGenerator.Domain.Validation;
 using StoryGenerator.Persistance;
+using StoryGenerator.Persistance.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,11 @@ namespace StoryGenerator.Controllers
     [Route("api/servants")]
     public class ServantController : Controller
     {
-        private ServantRepository ServantRepository;
+        private IServantRepository ServantRepository;
 
-        public ServantController()
+        public ServantController(IServantRepository servantRepository)
         {
-            ServantRepository = new ServantRepository();
+            ServantRepository = servantRepository;
         }
 
         [HttpGet("{id}")]

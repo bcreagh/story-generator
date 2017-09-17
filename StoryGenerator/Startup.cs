@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using StoryGenerator.Persistance.Abstractions;
+using StoryGenerator.Persistance;
 
 namespace StoryGenerator
 {
@@ -29,6 +31,9 @@ namespace StoryGenerator
         {
             // Add framework services.
             services.AddMvc();
+
+            services.AddSingleton<IMageRepository, MageRepository>();
+            services.AddSingleton<IServantRepository, ServantRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,6 @@
 ﻿
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using StoryGenerator.Domain.Enums;
 
 namespace StoryGenerator.Domain
@@ -13,6 +15,8 @@ namespace StoryGenerator.Domain
         public int Id { get; set; }
         public string Name { get; set; }
 
+        
+        [JsonConverter(typeof(StringEnumConverter))]
         [Raven.Imports.Newtonsoft.Json.JsonIgnore]
         public ServantClass ServantClass { get; set; }
         [Raven.Imports.Newtonsoft.Json.JsonIgnore]

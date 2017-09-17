@@ -1,4 +1,5 @@
 ﻿using StoryGenerator.Domain;
+using StoryGenerator.Persistance.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StoryGenerator.Persistance
 {
-    public class ServantRepository
+    public class ServantRepository: IServantRepository
     {
         public Servant GetServantById(int id)
         {

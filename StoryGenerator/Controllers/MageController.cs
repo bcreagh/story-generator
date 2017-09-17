@@ -3,17 +3,18 @@ using Microsoft.AspNetCore.Mvc;
 using StoryGenerator.Domain;
 using StoryGenerator.Persistance;
 using StoryGenerator.Domain.Validation;
+using StoryGenerator.Persistance.Abstractions;
 
 namespace StoryGenerator.Controllers
 {
     [Route("api/mages")]
     public class MageController : Controller
     {
-        private MageRepository MageRepository;
+        private IMageRepository MageRepository;
 
-        public MageController()
+        public MageController(IMageRepository mageRepository)
         {
-            MageRepository = new MageRepository();
+            MageRepository = mageRepository;
         }
 
         [HttpGet("{id}")]
