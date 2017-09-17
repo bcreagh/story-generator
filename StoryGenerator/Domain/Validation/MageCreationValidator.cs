@@ -1,24 +1,25 @@
 ﻿using FluentValidation;
+using StoryGenerator.Domain.Validation.Candidates;
 using System;
 using System.Linq.Expressions;
 
 namespace StoryGenerator.Domain.Validation
 {
-    public class MageCreationValidator: AbstractValidator<Mage>
+    public class MageCreationValidator: AbstractValidator<CreationCandidate<Mage>>
     {
         public MageCreationValidator()
         {
-            RuleFor(mage => mage.Strength).InclusiveBetween(0, 100);
-            RuleFor(mage => mage.Magic).InclusiveBetween(0, 100);
-            RuleFor(mage => mage.FightingAbility).InclusiveBetween(0, 100);
-            RuleFor(mage => mage.StrategicAbility).InclusiveBetween(0, 100);
-            RuleFor(mage => mage.Violence).InclusiveBetween(0, 100);
-            RuleFor(mage => mage.Arogance).InclusiveBetween(0, 100);
-            RuleFor(mage => mage.Selfishness).InclusiveBetween(0, 100);
-            RuleFor(mage => mage.Honour).InclusiveBetween(0, 100);
-            RuleFor(mage => mage.Kindness).InclusiveBetween(0, 100);
-            RuleFor(mage => mage.Mercifulness).InclusiveBetween(0, 100);
-            RuleFor(mage => mage.Name.Length).InclusiveBetween(1, 100);
+            RuleFor(cc => cc.Candidate.Strength).InclusiveBetween(0, 100);
+            RuleFor(cc => cc.Candidate.Magic).InclusiveBetween(0, 100);
+            RuleFor(cc => cc.Candidate.FightingAbility).InclusiveBetween(0, 100);
+            RuleFor(cc => cc.Candidate.StrategicAbility).InclusiveBetween(0, 100);
+            RuleFor(cc => cc.Candidate.Violence).InclusiveBetween(0, 100);
+            RuleFor(cc => cc.Candidate.Arogance).InclusiveBetween(0, 100);
+            RuleFor(cc => cc.Candidate.Selfishness).InclusiveBetween(0, 100);
+            RuleFor(cc => cc.Candidate.Honour).InclusiveBetween(0, 100);
+            RuleFor(cc => cc.Candidate.Kindness).InclusiveBetween(0, 100);
+            RuleFor(cc => cc.Candidate.Mercifulness).InclusiveBetween(0, 100);
+            RuleFor(cc => cc.Candidate.Name.Length).InclusiveBetween(1, 100);
         }
     }
 }

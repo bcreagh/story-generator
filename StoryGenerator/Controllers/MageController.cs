@@ -4,17 +4,23 @@ using StoryGenerator.Domain;
 using StoryGenerator.Persistance;
 using StoryGenerator.Domain.Validation;
 using StoryGenerator.Persistance.Abstractions;
+using StoryGenerator.Domain.Validation.Candidates;
+using FluentValidation;
 
 namespace StoryGenerator.Controllers
 {
     [Route("api/mages")]
     public class MageController : Controller
     {
-        private IMageRepository MageRepository;
+        private readonly IMageRepository MageRepository;
+        private readonly AbstractValidator<CreationCandidate<Mage>> MageCreationValidator;
 
-        public MageController(IMageRepository mageRepository)
+        public MageController(
+            IMageRepository mageRepository, 
+            AbstractValidator<CreationCandidate<Mage>> mageCreationValidator)
         {
             MageRepository = mageRepository;
+            MageCreationValidator = mageCreationValidator;
         }
 
         [HttpGet("{id}")]
@@ -35,8 +41,8 @@ namespace StoryGenerator.Controllers
         public dynamic SaveMage([FromBody] Mage mage)
         {
 
-            MageCreationValidator mcv = new MageCreationValidator();
-            var validationResults = mcv.Validate(mage);
+            var cc = new CreationCandidate<Mage>(mage);
+            var validationResults = MageCreationValidator.Validate(cc);
 
             if (validationResults.IsValid)
             {

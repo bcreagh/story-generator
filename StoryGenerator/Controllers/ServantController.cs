@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using StoryGenerator.Domain;
 using StoryGenerator.Domain.Validation;
+using StoryGenerator.Domain.Validation.Candidates;
 using StoryGenerator.Persistance;
 using StoryGenerator.Persistance.Abstractions;
 using System;
@@ -13,11 +15,15 @@ namespace StoryGenerator.Controllers
     [Route("api/servants")]
     public class ServantController : Controller
     {
-        private IServantRepository ServantRepository;
+        private readonly IServantRepository ServantRepository;
+        private readonly AbstractValidator<CreationCandidate<Servant>> ServantCreationValidator;
 
-        public ServantController(IServantRepository servantRepository)
+        public ServantController(
+            IServantRepository servantRepository, 
+            AbstractValidator<CreationCandidate<Servant>> servantCreationValidator)
         {
             ServantRepository = servantRepository;
+            ServantCreationValidator = servantCreationValidator;
         }
 
         [HttpGet("{id}")]
@@ -37,8 +43,9 @@ namespace StoryGenerator.Controllers
         [HttpPost]
         public dynamic SaveServant([FromBody] Servant servant)
         {
-            ServantCreationValidator scv = new ServantCreationValidator();
-            var validationResults = scv.Validate(servant);
+
+            var cc = new CreationCandidate<Servant>(servant);
+            var validationResults = ServantCreationValidator.Validate(cc);
 
             if (validationResults.IsValid)
             {

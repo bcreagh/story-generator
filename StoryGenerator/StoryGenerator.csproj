@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Validation\Abstractions\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

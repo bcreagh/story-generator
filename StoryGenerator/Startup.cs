@@ -9,6 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using StoryGenerator.Persistance.Abstractions;
 using StoryGenerator.Persistance;
+using StoryGenerator.Domain.Validation;
+using FluentValidation;
+using StoryGenerator.Domain;
+using StoryGenerator.Domain.Validation.Candidates;
 
 namespace StoryGenerator
 {
@@ -34,6 +38,8 @@ namespace StoryGenerator
 
             services.AddSingleton<IMageRepository, MageRepository>();
             services.AddSingleton<IServantRepository, ServantRepository>();
+            services.AddTransient<AbstractValidator<CreationCandidate<Servant>>, ServantCreationValidator>();
+            services.AddTransient<AbstractValidator<CreationCandidate<Mage>>, MageCreationValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
