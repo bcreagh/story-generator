@@ -13,11 +13,11 @@ namespace StoryGenerator.Controllers
     public class MageController : Controller
     {
         private readonly IMageRepository MageRepository;
-        private readonly AbstractValidator<CreationCandidate<Mage>> MageCreationValidator;
+        private readonly IValidator<CreationCandidate<Mage>> MageCreationValidator;
 
         public MageController(
             IMageRepository mageRepository, 
-            AbstractValidator<CreationCandidate<Mage>> mageCreationValidator)
+            IValidator<CreationCandidate<Mage>> mageCreationValidator)
         {
             MageRepository = mageRepository;
             MageCreationValidator = mageCreationValidator;
@@ -47,7 +47,7 @@ namespace StoryGenerator.Controllers
             if (validationResults.IsValid)
             {
                 MageRepository.SaveMage(mage);
-                return "Mage has been created";
+                return Ok("Mage Created");
             }
             else
             {

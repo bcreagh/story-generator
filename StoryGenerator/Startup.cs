@@ -39,7 +39,7 @@ namespace StoryGenerator
             services.AddSingleton<IMageRepository, MageRepository>();
             services.AddSingleton<IServantRepository, ServantRepository>();
             services.AddTransient<AbstractValidator<CreationCandidate<Servant>>, ServantCreationValidator>();
-            services.AddTransient<AbstractValidator<CreationCandidate<Mage>>, MageCreationValidator>();
+            services.AddTransient<IValidator<CreationCandidate<Mage>>, MageCreationValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
