@@ -38,7 +38,7 @@ namespace StoryGenerator
 
             services.AddSingleton<IMageRepository, MageRepository>();
             services.AddSingleton<IServantRepository, ServantRepository>();
-            services.AddTransient<AbstractValidator<CreationCandidate<Servant>>, ServantCreationValidator>();
+            services.AddTransient<IValidator<CreationCandidate<Servant>>, ServantCreationValidator>();
             services.AddTransient<IValidator<CreationCandidate<Mage>>, MageCreationValidator>();
         }
 

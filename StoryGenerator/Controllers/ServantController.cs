@@ -16,11 +16,11 @@ namespace StoryGenerator.Controllers
     public class ServantController : Controller
     {
         private readonly IServantRepository ServantRepository;
-        private readonly AbstractValidator<CreationCandidate<Servant>> ServantCreationValidator;
+        private readonly IValidator<CreationCandidate<Servant>> ServantCreationValidator;
 
         public ServantController(
-            IServantRepository servantRepository, 
-            AbstractValidator<CreationCandidate<Servant>> servantCreationValidator)
+            IServantRepository servantRepository,
+            IValidator<CreationCandidate<Servant>> servantCreationValidator)
         {
             ServantRepository = servantRepository;
             ServantCreationValidator = servantCreationValidator;
@@ -50,7 +50,7 @@ namespace StoryGenerator.Controllers
             if (validationResults.IsValid)
             {
                 ServantRepository.SaveServant(servant);
-                return "Servant has been created";
+                return Ok("Servant Created");
             }
             else
             {

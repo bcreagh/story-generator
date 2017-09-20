@@ -12,6 +12,8 @@ namespace StoryGenerator.Domain
         public Servant()
         {
             NoblePhantasm = new NoblePhantasm();
+            NoblePhantasm.Name = string.Empty;
+            Name = string.Empty;
         }
 
         public int Id { get; set; }
