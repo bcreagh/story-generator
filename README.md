@@ -3,7 +3,7 @@
 Story Generator is a REST API which can be used to generate a random plot for the Type Moon’s “Fate” series. 
 
 ### Contents
-* [Introduction](#howToUseIt)<br/>
+* [Introduction](#introduction)<br/>
 * [Functional Overview](#functionalOverview)<br/>
 * [How to use it](#howToUseIt)<br/>
 * [How to add mages](#howToAddMages)<br/>
@@ -12,6 +12,7 @@ Story Generator is a REST API which can be used to generate a random plot for th
 * [Disclaimer](#disclaimer)<br/>
 
 <a name="introduction"/>
+
 ### Introduction
 
 The Fate series is a novel/manga/anime franchise. The stories in this series follow a simple premise:
@@ -29,6 +30,7 @@ There are two primary purposes to this project:
 * Fun! ^__^
 
 <a name="functionalOverview"/>
+
 ### Functional Overview
 
 The functionality of the project is exposed using a REST API. Behind the scenes, it uses ASP.NET Core’s MVC framework and is written in C#. It uses RavenDB to store its data. 
@@ -39,6 +41,7 @@ The outcomes of these events are random, but may be affected by the attributes o
 It will continue to iteratively select these events until only one mage remains in the war. At this point, the war ends and the remaining mage wins the grail.
 
 <a name="howToUseIt"/>
+
 ### How to use it
 
 This project is a work-in-progress, but this section describes how it will work once completed.
@@ -69,6 +72,7 @@ The plot will be generated and sent back to the caller in JSON format. It will l
 ```
 
 <a name="howToAddMages"/>
+
 ### How to add mages
 
 Mages can be added by the database by making a POST HTTP request to the API. I personally use Postman to make such requests. The body of the request must contain the details of the mage in JSON format. The following example can be used as a template for creating new mages:
@@ -92,6 +96,7 @@ Mages can be added by the database by making a POST HTTP request to the API. I p
 A mage’s attributes will determine the likelihood of that mage creating an alliance with other mages. A mage’s attributes combined with the attributes of their servant will determine the likelihood of that mage defeating an opponent mage and servant.
 
 <a name="howToAddServants"/>
+
 ### How to add servants
 
 Similarly, servants can be added by the database by making a POST HTTP request to the API. The body of the request must contain the details of the servant in JSON format. The following example can be used as a template for creating new mages:
@@ -114,12 +119,14 @@ Similarly, servants can be added by the database by making a POST HTTP request t
 A Noble Phantasm refers to the servant’s mythical weapon.
 
 <a name="installationNotes"/>
+
 ### Installation notes
 
 Considering that this project doesn’t really serve any practical purpose and is purely for fun, it’s probably unlikely that anyone will ever install this.
  However, on the off chance that someone does, you should note that you must also install and run an instance of RavenDb. The project is configured to connect to RavenDb via the localhost on port 8080. You must create a database called “GrailWarDB”. You will not be able to generate a story until you have created at least seven mages and seven servants in the database. 
 
 <a name="disclaimer"/>
+
 ### Disclaimer
 
 I am a tech enthusiast and a fan of the Fate series. This project is a combination of those two aspects of my personality. It is intended to be used purely for fun. I claim no ownership over any of the characters, stories or intellectual properties associated with the Fate series. There is, and should never be any money or profit associated with this project. 
