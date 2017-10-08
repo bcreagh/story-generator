@@ -27,6 +27,8 @@ namespace StoryGenerator.Domain
             {
                 if (Alliances.Remove(alliance))
                 {
+                    MagesWithNoAlliances.Add(alliance.Mage1);
+                    MagesWithNoAlliances.Add(alliance.Mage2);
                     var sp = new StoryPlot();
                     sp.PlotEvents.Add("Alliance is broken");
                     return sp;
