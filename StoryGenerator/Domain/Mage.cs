@@ -35,5 +35,17 @@ namespace StoryGenerator.Domain
         public int Honour { get; set; }
         public int Kindness { get; set; }
         public int Mercifulness { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var mage = obj as Mage;
+
+            return (Id == mage.Id);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id;
+        }
     }
 }

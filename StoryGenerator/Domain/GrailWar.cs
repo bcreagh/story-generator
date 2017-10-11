@@ -44,5 +44,18 @@ namespace StoryGenerator.Domain
                 return null;
             } 
         }
+
+        public void KillMage(Mage mage)
+        {
+            if (AliveMages.Contains(mage))
+            {
+                AliveMages.Remove(mage);
+                DeadMages.Add(mage);
+            }
+            else
+            {
+                throw new ArgumentException("The mage could not be killed because it was not found in the list of alive mages");
+            }
+        }
     }
 }

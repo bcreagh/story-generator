@@ -74,7 +74,55 @@ namespace Tests.DomainTests
             Assert.IsTrue(finalCount == (initialCount + 2), "The mages who broke their alliance must be added to the MagesWithNoAlliances list!");
         }
 
+        [Test]
+        public void KillMage_ShouldThrowException_WhenMageIsNotInListOfAliveMages()
+        {
+            var mage1 = new Mage { Id = 1 };
+            var mage2 = new Mage { Id = 2 };
+            var mage3 = new Mage { Id = 3 };
 
+            gw.AliveMages.Add(mage1);
+            gw.AliveMages.Add(mage2);
+            
+            Assert.Throws<ArgumentException>(() => gw.KillMage(mage3));
+        }
+
+        [Test]
+        public void KillMage_ShouldDecreaseNumberOfAliveMagesByOne()
+        {
+            var mage1 = new Mage { Id = 1 };
+            var mage2 = new Mage { Id = 2 };
+            var mage3 = new Mage { Id = 3 };
+
+            gw.AliveMages.Add(mage1);
+            gw.AliveMages.Add(mage2);
+            gw.AliveMages.Add(mage3);
+
+            var initialCount = gw.AliveMages.Count;
+
+            gw.KillMage(mage2);
+
+            Assert.IsTrue(gw.AliveMages.Count == (initialCount -1));
+        }
+
+        [Test]
+        public void KillMage_ShouldIncreaseNumberOfDeadMagesByOne()
+        {
+            var mage1 = new Mage { Id = 1 };
+            var mage2 = new Mage { Id = 2 };
+            var mage3 = new Mage { Id = 3 };
+
+            gw.AliveMages.Add(mage1);
+            gw.AliveMages.Add(mage2);
+
+            gw.DeadMages.Add(mage3);
+
+            var initialCount = gw.DeadMages.Count;
+
+            gw.KillMage(mage2);
+
+            Assert.IsTrue(gw.DeadMages.Count == (initialCount + 1));
+        }
 
     }
 }
