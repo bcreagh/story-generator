@@ -124,5 +124,60 @@ namespace Tests.DomainTests
             Assert.IsTrue(gw.DeadMages.Count == (initialCount + 1));
         }
 
+        [Test]
+        public void FormAlliance_ShouldReduceNumberOfMagesNotInAllianceByTwo()
+        {
+            var mage1 = new Mage { Id = 1 };
+            var mage2 = new Mage { Id = 2 };
+            var mage3 = new Mage { Id = 3 };
+
+            var alliance = new Alliance(mage1, mage2);
+
+            gw.MagesWithNoAlliances.Add(mage1);
+            gw.MagesWithNoAlliances.Add(mage2);
+            gw.MagesWithNoAlliances.Add(mage3);
+
+            var initialCount = gw.MagesWithNoAlliances.Count;
+
+            gw.FormAlliance(alliance);
+
+            Assert.IsTrue(gw.MagesWithNoAlliances.Count == (initialCount - 2));
+        }
+
+        [Test]
+        public void FormAlliance_ShouldIncreaseNumberOfAlliancesByOne()
+        {
+            var mage1 = new Mage { Id = 1 };
+            var mage2 = new Mage { Id = 2 };
+            var mage3 = new Mage { Id = 3 };
+
+            var alliance = new Alliance(mage1, mage2);
+
+            gw.MagesWithNoAlliances.Add(mage1);
+            gw.MagesWithNoAlliances.Add(mage2);
+            gw.MagesWithNoAlliances.Add(mage3);
+
+            var initialCount = gw.Alliances.Count;
+
+            gw.FormAlliance(alliance);
+
+            Assert.IsTrue(gw.Alliances.Count == (initialCount + 1));
+        }
+
+        [Test]
+        public void FormAlliances_ShouldReturnNull_WhenMagesAreNotInMagesWithNoAlliances()
+        {
+            var mage1 = new Mage { Id = 1 };
+            var mage2 = new Mage { Id = 2 };
+            var mage3 = new Mage { Id = 3 };
+
+            var alliance = new Alliance(mage1, mage2);
+
+            gw.MagesWithNoAlliances.Add(mage2);
+            gw.MagesWithNoAlliances.Add(mage3);
+
+            Assert.Throws<ArgumentException>(() => gw.FormAlliance(alliance));
+        }
+
     }
 }

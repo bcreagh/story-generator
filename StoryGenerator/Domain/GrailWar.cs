@@ -57,5 +57,26 @@ namespace StoryGenerator.Domain
                 throw new ArgumentException("The mage could not be killed because it was not found in the list of alive mages");
             }
         }
+
+        public StoryPlot FormAlliance(Alliance alliance)
+        {
+            if (alliance.Mage1 == null || alliance.Mage2 == null)
+            {
+                throw new ArgumentException("An alliance's mages cannot be null");
+            }
+
+            if (MagesWithNoAlliances.Contains(alliance.Mage1) && MagesWithNoAlliances.Contains(alliance.Mage2))
+            {
+                MagesWithNoAlliances.Remove(alliance.Mage1);
+                MagesWithNoAlliances.Remove(alliance.Mage2);
+                Alliances.Add(alliance);
+
+                return new StoryPlot($"{alliance.Mage1.Name} and {alliance.Mage2.Name} have formed an alliance");
+            }
+            else
+            {
+                throw new ArgumentException("Mages must be in the list of MagesWithNoAlliance to form an alliance");
+            }
+        }
     }
 }

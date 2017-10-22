@@ -14,6 +14,12 @@ namespace StoryGenerator.Domain.Story
             PlotEvents = new List<string>();
         }
 
+        public StoryPlot(string message)
+        {
+            PlotEvents = new List<string>();
+            PlotEvents.Add(message);
+        }
+
         public void Add(StoryPlot newPlotEvents)
         {
             PlotEvents = PlotEvents.Concat(newPlotEvents.PlotEvents).ToList();
